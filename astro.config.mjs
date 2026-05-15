@@ -7,8 +7,8 @@ import icon from 'astro-icon';
 
 // https://astro.build/config
 export default defineConfig({
-  // site: '#',
-  // base: '/',
+  site: 'https://masoudsoleymani.github.io/',
+  base: 'masoudsole',
   vite: {
     resolve: {
       tsconfigPaths: false
