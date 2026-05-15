@@ -1,0 +1,35 @@
+{
+  "name": "Masoud",
+  "photoUrl": "pic.jpeg",
+  "intro": "I am a Software Engineer specializing in JavaScript, TypeScript, React, and Next.js with 5+ years of professional experience building scalable enterprise web applications. Focused on frontend architecture, performance, developer experience, and creating maintainable systems that scale. Experienced in building API-driven applications, reusable component libraries, authentication systems, and modern fullstack solutions using GraphQL and Node.js. Passionate about clean engineering, practical problem-solving, and building reliable user experiences through thoughtful architecture, collaboration, and AI-driven technologies.",
+  "introHtml": "I am a Software Engineer specializing in <span class='text-white font-bold'>JavaScript</span>, <span class='text-white font-bold'>TypeScript</span>, <span class='text-white font-bold'>React</span>, and <span class='text-white font-bold'>Next.js</span> with 5+ years of experience building scalable enterprise web applications. Focused on frontend architecture, performance, developer experience, and creating maintainable systems that scale. Experienced in building API-driven applications, reusable component libraries, authentication systems, and modern fullstack solutions using GraphQL and Node.js. Passionate about clean engineering, practical problem-solving, and building reliable user experiences through thoughtful architecture, collaboration, and AI-driven technologies.",
+  "webpageTitle": "Masoud",
+
+  "_comment": "Add your social links below. Leave the 'url' empty to hide the icon. Set 'showInContact' to true or false to control if it appears in the Contact section.",
+  "socials": [
+    {
+      "name": "GitHub",
+      "url": "https://github.com/masoudsoleymani",
+      "icon": "mdi:github",
+      "showInContact": true
+    },
+    {
+      "name": "LinkedIn",
+      "url": "https://www.linkedin.com/in/masoud-soleymani/",
+      "icon": "mdi:linkedin",
+      "showInContact": true
+    },
+    {
+      "name": "Email",
+      "url": "mailto:msoolymani@gmail.com",
+      "icon": "mdi:email",
+      "showInContact": true
+    },
+    {
+      "name": "Whatsapp",
+      "url": "https://wa.me/351914113582",
+      "icon": "mdi:whatsapp",
+      "showInContact": true
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<section id="contact" class="section-container mx-auto overflow-hidden">
+  <div class="container mx-auto reveal-content" style="animation-delay: 1000ms;">
+    <div>
+      <h2 class="text-3xl md:text-4xl font-heading font-bold text-maintext mb-2 flex items-center gap-4">
+        <span class="text-accent">/</span> Contact
+      </h2>
+      <p class="text-subtext font-body text-sm max-w-md pb-8">
+        Have a question or want to work together? Send me a message.
+      </p>
+    </div>
+
+    <div class="max-w-2xl mx-auto">
+      <form 
+        id="contact-form" 
+        class="space-y-6"
+        method="POST"
+        action="/.netlify/functions/create-issue"
+      >
+        <div class="bg-accent/5 border border-accent/10 p-6 rounded-2xl hover:border-accent/40 transition-all">
+          <label for="name" class="block text-sm font-body text-subtext mb-2">Name</label>
+          <input 
+            type="text" 
+            id="name" 
+            name="name" 
+            required
+            class="w-full bg-accent/5 border border-accent/10 rounded-lg px-4 py-3 text-maintext placeholder-gray-500 focus:outline-none focus:border-accent/40 focus:ring-1 focus:ring-accent/40 transition-all"
+            placeholder="Your name"
+          />
+        </div>
+
+        <div class="bg-accent/5 border border-accent/10 p-6 rounded-2xl hover:border-accent/40 transition-all">
+          <label for="email" class="block text-sm font-body text-subtext mb-2">Email</label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            required
+            class="w-full bg-accent/5 border border-accent/10 rounded-lg px-4 py-3 text-maintext placeholder-gray-500 focus:outline-none focus:border-accent/40 focus:ring-1 focus:ring-accent/40 transition-all"
+            placeholder="your@email.com"
+          />
+        </div>
+
+        <div class="bg-accent/5 border border-accent/10 p-6 rounded-2xl hover:border-accent/40 transition-all">
+          <label for="message" class="block text-sm font-body text-subtext mb-2">Message</label>
+          <textarea 
+            id="message" 
+            name="message" 
+            required
+            rows="5"
+            class="w-full bg-accent/5 border border-accent/10 rounded-lg px-4 py-3 text-maintext placeholder-gray-500 focus:outline-none focus:border-accent/40 focus:ring-1 focus:ring-accent/40 transition-all resize-y"
+            placeholder="Your message..."
+          ></textarea>
+        </div>
+
+        <button 
+          type="submit"
+          class="w-full bg-accent/10 border border-accent/20 text-accent font-body font-medium px-6 py-3 rounded-lg hover:bg-accent/20 hover:border-accent/40 transition-all duration-300"
+        >
+          Submit
+        </button>
+      </form>
+
+      <div id="form-status" class="mt-4 text-center text-sm font-body hidden"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .reveal-content {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: revealIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+
+  @keyframes revealIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const formStatus = document.getElementById('form-status');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const originalButtonText = submitButton?.textContent || 'Submit';
+    if (submitButton) {
+      submitButton.textContent = 'Sending...';
+      submitButton.disabled = true;
+    }
+
+    const formData = new FormData(form);
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      message: formData.get('message')
+    };
+
+    try {
+      const response = await fetch('/.netlify/functions/create-issue', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && formStatus) {
+        formStatus.textContent = 'Message sent successfully!';
+        formStatus.className = 'mt-4 text-center text-sm font-body text-accent';
+        form.reset();
+      } else if (formStatus) {
+        formStatus.textContent = result.error || 'Failed to send message. Please try again.';
+        formStatus.className = 'mt-4 text-center text-sm font-body text-red-400';
+      }
+    } catch (error) {
+      if (formStatus) {
+        formStatus.textContent = 'Failed to send message. Please try again.';
+        formStatus.className = 'mt-4 text-center text-sm font-body text-red-400';
+      }
+    } finally {
+      if (submitButton) {
+        submitButton.textContent = originalButtonText;
+        submitButton.disabled = false;
+      }
+      if (formStatus) {
+        formStatus.classList.remove('hidden');
+      }
+    }
+  });
+</script>
