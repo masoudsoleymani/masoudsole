@@ -22,12 +22,6 @@
       "url": "mailto:msoolymani@gmail.com",
       "icon": "mdi:email",
       "showInContact": true
-    },
-    {
-      "name": "Whatsapp",
-      "url": "https://wa.me/351914113582",
-      "icon": "mdi:whatsapp",
-      "showInContact": true
     }
   ]
 }
