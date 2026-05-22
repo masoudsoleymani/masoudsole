@@ -52,6 +52,9 @@ exports.handler = async (event, context) => {
     // Create GitHub issue
     const issueTitle = `Contact Form Submission from ${name}`;
     const issueBody = `
+      @masoudsoleymani
+      @stevesoleymani
+
       **Name:** ${name}
       **Email:** ${email}
 
